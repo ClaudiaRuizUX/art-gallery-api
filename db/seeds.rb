@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Trees = Project.create(title: "Trees", description: "Green of spring")
+Geometrics = Project.create(title: "Circles", description: "Geometric circles")
+
+Nature = Theme.create(name: "Nature", project: 1)
+Abstract = Theme.create(name: "Abstract", project: 2)
