@@ -27,8 +27,8 @@ ActiveRecord::Schema.define(version: 2022_10_23_050744) do
 
   create_table "themes", force: :cascade do |t|
     t.string "name"
-    t.integer "project_id", null: false
-    t.integer "sections_id", null: false
+    t.integer "project_id"
+    t.integer "sections_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["project_id"], name: "index_themes_on_project_id"

@@ -13,5 +13,5 @@ Squares = Project.create(title: "Squares", description: "Some Squares")
 Featured = Section.create(title: "Festival this year")
 Popular = Section.create(title: "Top Artists")
 
-Nature = Theme.create(name: "Nature", project: 1, section:2)
-Abstract = Theme.create(name: "Abstract", project: 2, section:1)
+Nature = Theme.create(name: "Nature", project: Trees, section: Popular)
+Abstract = Theme.create(name: "Abstract", project: Popular, section: Featured)
