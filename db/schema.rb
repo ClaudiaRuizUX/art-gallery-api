@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_23_050744) do
+ActiveRecord::Schema.define(version: 2022_10_25_102429) do
+
+  create_table "categories", force: :cascade do |t|
+    t.integer "project_id", null: false
+    t.integer "section_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_categories_on_project_id"
+    t.index ["section_id"], name: "index_categories_on_section_id"
+  end
 
   create_table "projects", force: :cascade do |t|
     t.string "title"
@@ -20,21 +29,11 @@ ActiveRecord::Schema.define(version: 2022_10_23_050744) do
   end
 
   create_table "sections", force: :cascade do |t|
-    t.string "title"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "themes", force: :cascade do |t|
     t.string "name"
-    t.integer "project_id"
-    t.integer "sections_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["project_id"], name: "index_themes_on_project_id"
-    t.index ["sections_id"], name: "index_themes_on_sections_id"
   end
 
-  add_foreign_key "themes", "projects"
-  add_foreign_key "themes", "sections", column: "sections_id"
+  add_foreign_key "categories", "projects"
+  add_foreign_key "categories", "sections"
 end

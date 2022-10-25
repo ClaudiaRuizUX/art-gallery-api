@@ -5,13 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Trees = Project.create(title: "Trees", description: "Green of spring")
-Geometrics = Project.create(title: "Circles", description: "Geometric circles")
-Fruits = Project.create(title: "Apples", description: "Many Apples")
-Squares = Project.create(title: "Squares", description: "Some Squares")
+project_a = Project.create(title: "Trees", description: "Green of spring")
+project_b = Project.create(title: "Circles", description: "Geometric circle")
+project_c = Project.create(title: "Apples", description: "Many Apples")
+project_d = Project.create(title: "Squares", description: "Some Squares")
 
-Featured = Section.create(title: "Festival this year")
-Popular = Section.create(title: "Top Artists")
+section_a = Section.create(name: "Festival this year")
+section_b = Section.create(name: "Top Artists")
 
-Nature = Theme.create(name: "Nature", project: Trees, section: Popular)
-Abstract = Theme.create(name: "Abstract", project: Popular, section: Featured)
+category_a = Category.create(project: project_a, section: section_a)
+category_b = Category.create(project: project_b, section: section_b)
