@@ -4,9 +4,19 @@ class CategorisingSerializer
     end
 
     def to_serialized_json
-        @categorising.to_json(:include => {
-          :project => {:only => [:title, :description]},
-          :section => {:only => [:name]}
-        }, :except => [:updated_at])
+        options = {
+            include: {
+            project: {
+                only: [:title, :description]
+            },
+            section: {
+                only: [:name]
+            }
+            },
+            except: [:updated_at],
+        }
+        @categorising.to_json(options)
     end
 end
+
+
