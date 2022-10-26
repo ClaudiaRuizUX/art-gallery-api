@@ -3,15 +3,9 @@
 #
 # Examples:
 #
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
+#   Character.create(name: "Luke", movie: movies.first)
 project_a = Project.create(title: "Trees", description: "Green of spring")
 project_b = Project.create(title: "Circles", description: "Geometric circle")
 project_c = Project.create(title: "Apples", description: "Many Apples")
 project_d = Project.create(title: "Squares", description: "Some Squares")
-
-section_a = Section.create(name: "Festival this year")
-section_b = Section.create(name: "Top Artists")
-
-category_a = Category.create(project: project_a, section: section_a)
-category_b = Category.create(project: project_b, section: section_b)

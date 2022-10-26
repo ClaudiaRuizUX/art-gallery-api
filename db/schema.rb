@@ -10,30 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_25_102429) do
-
-  create_table "categories", force: :cascade do |t|
-    t.integer "project_id", null: false
-    t.integer "section_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["project_id"], name: "index_categories_on_project_id"
-    t.index ["section_id"], name: "index_categories_on_section_id"
-  end
+ActiveRecord::Schema[7.0].define(version: 2022_10_26_202213) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "projects", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "sections", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  add_foreign_key "categories", "projects"
-  add_foreign_key "categories", "sections"
 end
