@@ -13,5 +13,5 @@ project_d = Project.create(title: "Squares", description: "Some Squares")
 section_a = Section.create(name: "Festival this year")
 section_b = Section.create(name: "Top Artists")
 
-category_a = Category.create(project: project_a, section: section_a)
-category_b = Category.create(project: project_b, section: section_b)
+category_a = Category.create(name: "Nature Art", project: project_a, section: section_a)
+category_b = Category.create(name: "Abstract Art", project: project_b, section: section_b)
