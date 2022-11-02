@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
+  resources :projects, only: [:show, :index, :new, :edit] do
+    resources :categories, only: [:show, :index, :new, :edit]
+  end
+
+  resources :sections, only: [:show, :index, :new, :edit] do
+    resources :categories, only: [:show, :index, :new, :edit]
+  end
+
+  resources :projects
   resources :categories
   resources :sections
-  resources :projects
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  root 'categories#index'
 end
