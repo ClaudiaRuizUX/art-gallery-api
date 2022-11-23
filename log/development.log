@@ -2116,3 +2116,198 @@ Processing by ProjectsController#index as HTML
 Completed 200 OK in 10ms (Views: 6.9ms | ActiveRecord: 2.3ms | Allocations: 1840)
 
 
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.9ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (1.8ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (6878.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "art_gallery_api_development"[0m
+  [1m[35m (3860.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "art_gallery_api_test"[0m
+  [1m[35m (445.2ms)[0m  [1m[35mCREATE DATABASE "art_gallery_api_development" ENCODING = 'unicode'[0m
+  [1m[35m (322.2ms)[0m  [1m[35mCREATE DATABASE "art_gallery_api_test" ENCODING = 'unicode'[0m
+  [1m[35m (6.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (122.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5775730110877205115)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateProjects (20221026202213)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (51.2ms)[0m  [1m[35mCREATE TABLE "projects" ("id" bigserial primary key, "title" character varying, "description" text, "image" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20221026202213"]]
+  [1m[36mTRANSACTION (6.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSections (20221027063740)
+  [1m[36mTRANSACTION (23.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (7.3ms)[0m  [1m[35mCREATE TABLE "sections" ("id" bigserial primary key, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20221027063740"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCategories (20221027063756)
+  [1m[36mTRANSACTION (40.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (13.9ms)[0m  [1m[35mCREATE TABLE "categories" ("id" bigserial primary key, "name" character varying, "project_id" bigint NOT NULL, "section_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_b291f1c56e"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+, CONSTRAINT "fk_rails_76a6c871ba"
+FOREIGN KEY ("section_id")
+  REFERENCES "sections" ("id")
+)[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE INDEX "index_categories_on_project_id" ON "categories" ("project_id")[0m
+  [1m[35m (5.3ms)[0m  [1m[35mCREATE INDEX "index_categories_on_section_id" ON "categories" ("section_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20221027063756"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-11-23 19:41:56.593598"], ["updated_at", "2022-11-23 19:41:56.593598"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(5775730110877205115)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProject Create (1.1ms)[0m  [1m[32mINSERT INTO "projects" ("title", "description", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "Eyes Deep"], ["description", "Eyes deep, cat painting from Oklahoma Artist Don Northup has been honing his acrylic art works since 2004. His desire is to create art that speaks directly from his heart.\n"], ["image", "https://c4.wallpaperflare.com/wallpaper/829/227/702/cat-artwork-eyes-deep-art-wallpaper-preview.jpg"], ["created_at", "2022-11-23 19:42:07.142040"], ["updated_at", "2022-11-23 19:42:07.142040"]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProject Create (0.3ms)[0m  [1m[32mINSERT INTO "projects" ("title", "description", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "Trees"], ["description", "Oklahoma Artist Don Northup. His desire is to create art that speaks directly from his heart is reflected on this butterfly piece.\n"], ["image", "https://c4.wallpaperflare.com/wallpaper/223/681/271/digital-art-simple-background-minimalism-butterfly-wallpaper-preview.jpg"], ["created_at", "2022-11-23 19:42:07.147984"], ["updated_at", "2022-11-23 19:42:07.147984"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProject Create (0.4ms)[0m  [1m[32mINSERT INTO "projects" ("title", "description", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "Dark Messenger"], ["description", "Digital piece from Swiss-born artist Ger Semark. His highly individual style full of expression."], ["image", "https://c4.wallpaperflare.com/wallpaper/995/32/980/crow-raven-ink-animals-wallpaper-preview.jpg"], ["created_at", "2022-11-23 19:42:07.152125"], ["updated_at", "2022-11-23 19:42:07.152125"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProject Create (0.3ms)[0m  [1m[32mINSERT INTO "projects" ("title", "description", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "Bird"], ["description", "Digital piece from Swiss-born artist Ger Semark. His highly individual style full of expression."], ["image", "https://c4.wallpaperflare.com/wallpaper/288/154/370/eagle-birds-artwork-paint-splatter-wallpaper-preview.jpg"], ["created_at", "2022-11-23 19:42:07.156119"], ["updated_at", "2022-11-23 19:42:07.156119"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProject Create (0.3ms)[0m  [1m[32mINSERT INTO "projects" ("title", "description", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "Morning"], ["description", "Michael Kirch has spent his years capturing the still image of people, cultures, and landscapes from around the world, to around the block"], ["image", "https://c4.wallpaperflare.com/wallpaper/618/711/643/nature-leaves-plants-water-drops-wallpaper-preview.jpg"], ["created_at", "2022-11-23 19:42:07.159957"], ["updated_at", "2022-11-23 19:42:07.159957"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProject Create (0.3ms)[0m  [1m[32mINSERT INTO "projects" ("title", "description", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "Summer"], ["description", "Michael Kirch has spent his years capturing the still image of people, cultures, and landscapes from around the world, to around the block"], ["image", "https://c4.wallpaperflare.com/wallpaper/534/654/494/leaves-green-depth-of-field-nature-wallpaper-preview.jpg"], ["created_at", "2022-11-23 19:42:07.163927"], ["updated_at", "2022-11-23 19:42:07.163927"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProject Create (0.6ms)[0m  [1m[32mINSERT INTO "projects" ("title", "description", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "Lara Apple"], ["description", "Lara Fruscia is a World Visionary Fine Art artist. Her work includes repeated use of patterns and motifs pixelated and crafted."], ["image", "https://c4.wallpaperflare.com/wallpaper/681/897/134/colorful-women-minjae-lee-face-wallpaper-preview.jpg"], ["created_at", "2022-11-23 19:42:07.167742"], ["updated_at", "2022-11-23 19:42:07.167742"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProject Create (0.3ms)[0m  [1m[32mINSERT INTO "projects" ("title", "description", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "RSI"], ["description", "Lara Fruscia is a World Visionary Fine Art artist. Her work includes repeated use of patterns and motifs pixelated and crafted."], ["image", "https://c4.wallpaperflare.com/wallpaper/203/357/159/artwork-surreal-hands-colorful-wallpaper-preview.jpg"], ["created_at", "2022-11-23 19:42:07.172143"], ["updated_at", "2022-11-23 19:42:07.172143"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProject Create (0.5ms)[0m  [1m[32mINSERT INTO "projects" ("title", "description", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "Slow Motion"], ["description", "Lisa Congdon is an American fine artist, author and illustrator known internationally for her colorful drawings and hand lettering."], ["image", "https://c4.wallpaperflare.com/wallpaper/368/820/19/abstract-digital-art-artwork-lines-wallpaper-preview.jpg"], ["created_at", "2022-11-23 19:42:07.176119"], ["updated_at", "2022-11-23 19:42:07.176119"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProject Create (0.3ms)[0m  [1m[32mINSERT INTO "projects" ("title", "description", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "Options and Trades"], ["description", "Lisa Congdon is an American fine artist, author and illustrator known internationally for her colorful drawings and hand lettering."], ["image", "https://c4.wallpaperflare.com/wallpaper/848/913/162/minimalism-abstract-digital-art-lines-wallpaper-preview.jpg"], ["created_at", "2022-11-23 19:42:07.180050"], ["updated_at", "2022-11-23 19:42:07.180050"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProject Create (0.6ms)[0m  [1m[32mINSERT INTO "projects" ("title", "description", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "Fire"], ["description", "Lisa Congdon is an American fine artist, author and illustrator known internationally for her colorful drawings and hand lettering."], ["image", "https://c4.wallpaperflare.com/wallpaper/718/944/928/minimalism-geometry-triangle-nebula-wallpaper-preview.jpg"], ["created_at", "2022-11-23 19:42:07.183830"], ["updated_at", "2022-11-23 19:42:07.183830"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProject Create (0.3ms)[0m  [1m[32mINSERT INTO "projects" ("title", "description", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "3D 1D D"], ["description", "Lisa Congdon is an American fine artist, author and illustrator known internationally for her colorful drawings and hand lettering."], ["image", "https://c4.wallpaperflare.com/wallpaper/243/288/4/geometry-triangle-abstract-shapes-wallpaper-preview.jpg"], ["created_at", "2022-11-23 19:42:07.188170"], ["updated_at", "2022-11-23 19:42:07.188170"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSection Create (40.4ms)[0m  [1m[32mINSERT INTO "sections" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Nature"], ["created_at", "2022-11-23 19:42:07.209114"], ["updated_at", "2022-11-23 19:42:07.209114"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSection Create (0.9ms)[0m  [1m[32mINSERT INTO "sections" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Abstract"], ["created_at", "2022-11-23 19:42:07.255057"], ["updated_at", "2022-11-23 19:42:07.255057"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (42.9ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Detailed"], ["project_id", 1], ["section_id", 1], ["created_at", "2022-11-23 19:42:07.294488"], ["updated_at", "2022-11-23 19:42:07.294488"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (1.1ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Drawings"], ["project_id", 1], ["section_id", 1], ["created_at", "2022-11-23 19:42:07.343191"], ["updated_at", "2022-11-23 19:42:07.343191"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (1.1ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Acrylic"], ["project_id", 1], ["section_id", 1], ["created_at", "2022-11-23 19:42:07.350717"], ["updated_at", "2022-11-23 19:42:07.350717"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.6ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Warm"], ["project_id", 1], ["section_id", 1], ["created_at", "2022-11-23 19:42:07.358466"], ["updated_at", "2022-11-23 19:42:07.358466"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Detailed"], ["project_id", 2], ["section_id", 2], ["created_at", "2022-11-23 19:42:07.363991"], ["updated_at", "2022-11-23 19:42:07.363991"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.7ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Drawings"], ["project_id", 2], ["section_id", 2], ["created_at", "2022-11-23 19:42:07.368201"], ["updated_at", "2022-11-23 19:42:07.368201"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Acrylic"], ["project_id", 2], ["section_id", 2], ["created_at", "2022-11-23 19:42:07.372525"], ["updated_at", "2022-11-23 19:42:07.372525"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Warm"], ["project_id", 2], ["section_id", 2], ["created_at", "2022-11-23 19:42:07.376514"], ["updated_at", "2022-11-23 19:42:07.376514"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Detailed"], ["project_id", 3], ["section_id", 1], ["created_at", "2022-11-23 19:42:07.380711"], ["updated_at", "2022-11-23 19:42:07.380711"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Black White"], ["project_id", 3], ["section_id", 1], ["created_at", "2022-11-23 19:42:07.384691"], ["updated_at", "2022-11-23 19:42:07.384691"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Detailed"], ["project_id", 4], ["section_id", 1], ["created_at", "2022-11-23 19:42:07.388867"], ["updated_at", "2022-11-23 19:42:07.388867"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Cold"], ["project_id", 4], ["section_id", 1], ["created_at", "2022-11-23 19:42:07.392763"], ["updated_at", "2022-11-23 19:42:07.392763"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Detailed"], ["project_id", 5], ["section_id", 1], ["created_at", "2022-11-23 19:42:07.397127"], ["updated_at", "2022-11-23 19:42:07.397127"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Warm"], ["project_id", 5], ["section_id", 1], ["created_at", "2022-11-23 19:42:07.400928"], ["updated_at", "2022-11-23 19:42:07.400928"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Detailed"], ["project_id", 6], ["section_id", 1], ["created_at", "2022-11-23 19:42:07.406327"], ["updated_at", "2022-11-23 19:42:07.406327"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Warm"], ["project_id", 6], ["section_id", 1], ["created_at", "2022-11-23 19:42:07.410570"], ["updated_at", "2022-11-23 19:42:07.410570"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Detailed"], ["project_id", 7], ["section_id", 2], ["created_at", "2022-11-23 19:42:07.414503"], ["updated_at", "2022-11-23 19:42:07.414503"]]
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Warm"], ["project_id", 7], ["section_id", 2], ["created_at", "2022-11-23 19:42:07.419458"], ["updated_at", "2022-11-23 19:42:07.419458"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.6ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Fine Art"], ["project_id", 7], ["section_id", 2], ["created_at", "2022-11-23 19:42:07.423791"], ["updated_at", "2022-11-23 19:42:07.423791"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Drawings"], ["project_id", 7], ["section_id", 2], ["created_at", "2022-11-23 19:42:07.428242"], ["updated_at", "2022-11-23 19:42:07.428242"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (1.1ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Detailed"], ["project_id", 8], ["section_id", 2], ["created_at", "2022-11-23 19:42:07.432150"], ["updated_at", "2022-11-23 19:42:07.432150"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Warm"], ["project_id", 8], ["section_id", 2], ["created_at", "2022-11-23 19:42:07.436860"], ["updated_at", "2022-11-23 19:42:07.436860"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Fine Art"], ["project_id", 8], ["section_id", 2], ["created_at", "2022-11-23 19:42:07.440813"], ["updated_at", "2022-11-23 19:42:07.440813"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Drawings"], ["project_id", 8], ["section_id", 2], ["created_at", "2022-11-23 19:42:07.444961"], ["updated_at", "2022-11-23 19:42:07.444961"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.6ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Geometric"], ["project_id", 9], ["section_id", 2], ["created_at", "2022-11-23 19:42:07.448804"], ["updated_at", "2022-11-23 19:42:07.448804"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Warm"], ["project_id", 9], ["section_id", 2], ["created_at", "2022-11-23 19:42:07.453437"], ["updated_at", "2022-11-23 19:42:07.453437"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Minimalist"], ["project_id", 9], ["section_id", 2], ["created_at", "2022-11-23 19:42:07.457703"], ["updated_at", "2022-11-23 19:42:07.457703"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.6ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Geometric"], ["project_id", 10], ["section_id", 2], ["created_at", "2022-11-23 19:42:07.461803"], ["updated_at", "2022-11-23 19:42:07.461803"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.6ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Warm"], ["project_id", 10], ["section_id", 2], ["created_at", "2022-11-23 19:42:07.468018"], ["updated_at", "2022-11-23 19:42:07.468018"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.6ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Minimalist"], ["project_id", 10], ["section_id", 2], ["created_at", "2022-11-23 19:42:07.475000"], ["updated_at", "2022-11-23 19:42:07.475000"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.6ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Geometric"], ["project_id", 11], ["section_id", 2], ["created_at", "2022-11-23 19:42:07.482226"], ["updated_at", "2022-11-23 19:42:07.482226"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.6ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Warm"], ["project_id", 11], ["section_id", 2], ["created_at", "2022-11-23 19:42:07.488383"], ["updated_at", "2022-11-23 19:42:07.488383"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.6ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Minimalist"], ["project_id", 11], ["section_id", 2], ["created_at", "2022-11-23 19:42:07.495865"], ["updated_at", "2022-11-23 19:42:07.495865"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Geometric"], ["project_id", 12], ["section_id", 2], ["created_at", "2022-11-23 19:42:07.502358"], ["updated_at", "2022-11-23 19:42:07.502358"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Cold"], ["project_id", 12], ["section_id", 2], ["created_at", "2022-11-23 19:42:07.506655"], ["updated_at", "2022-11-23 19:42:07.506655"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "project_id", "section_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Minimalist"], ["project_id", 12], ["section_id", 2], ["created_at", "2022-11-23 19:42:07.510790"], ["updated_at", "2022-11-23 19:42:07.510790"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
