@@ -27,7 +27,7 @@ image: "https://c4.wallpaperflare.com/wallpaper/618/711/643/nature-leaves-plants
 )
 proj_summer = Project.create(
 title: "Summer", 
-description: "Michael Kirch has spent his years capturing the still image of people, cultures, and landscapes from around the world, to around the block",
+description: "Michael Kirch has spent his years capturing the still image of people, cultures, and landscapes from around the world, to around the block.",
 image: "https://c4.wallpaperflare.com/wallpaper/534/654/494/leaves-green-depth-of-field-nature-wallpaper-preview.jpg"
 )
 proj_apple = Project.create(

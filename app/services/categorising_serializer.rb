@@ -6,7 +6,7 @@ class CategorisingSerializer
         options = {
             include: {
             project: {
-                only: [:title, :description]
+                only: [:title, :description, :image]
             },
             section: {
                 only: [:name]
