@@ -1,24 +1,10 @@
-# README
+# Projects API 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Description
 
-Things you may want to cover:
+This is a backend API deleveloped with Ruby version 2.7.4 and Rails version 7.0.4,
+is built with a CRUD actions database with 3 tables. The categories table holds the foreign keys for projects and sections table.
 
-* Ruby version
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Developer
+Claudia Ruiz
